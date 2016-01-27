@@ -12,6 +12,10 @@ buildscript {
     }
 }
 
+plugins {
+  id "com.moowork.gulp" version "0.11"
+}
+
 apply plugin: 'com.enonic.xp.app'
 
 app {
@@ -34,3 +38,21 @@ repositories {
         url 'http://repo.enonic.com/public'
     }
 }
+
+node {
+    // Version of node to use.
+    //version = '0.12.7'
+    version = '4.2.4'
+
+    // Enabled the automatic download. False is the default (for now).
+    download = true
+}
+
+// makes sure on each build that gulp is installed
+gulp_build.dependsOn 'installGulp'
+
+// processes your package.json before running gulp build
+gulp_build.dependsOn 'npmInstall'
+
+// runs "gulp build" as part of your gradle build
+jar.dependsOn gulp_build
