@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=1"/>
+
+    <meta name="robots" content="NOODP"/>
+
+    <title data-th-text="${pageTitle}">Gulp Starter</title>
+
+   <!-- <link rel="shortcut icon" data-th-href="${portal.assetUrl({'_path=img/favicon.ico'})}"/>
+-->
+
+    <script data-th-replace="/site/pages/fragments/fragments::loadCSS-fragment"></script>
+
+    <script data-th-utext="'loadCSS(\'' + ${portal.assetUrl({'_path=css/non-critical.css'}) + '\');'}">
+
+    </script>
+    <noscript>
+        <link rel="stylesheet" data-th-href="${portal.assetUrl({'_path=css/non-critical.css'})}"
+              href="/assets/css/non-critical-min.css"/>
+    </noscript>
+
+    <link rel="stylesheet" data-th-href="${portal.assetUrl({'_path=css/critical.css'})}"
+          href="/assets/css/critical-min.css"/>
+
+</head>
+
+<body role="document">
+
+
+<header class="page-header">
+        <a class="page-header__logo-link" title="Frontpage" data-th-href="${portal.pageUrl({'_path=' + sitePath})}">
+            <span class="page-header__logo-text">Gulp Starter</span>
+        </a>
+
+        <button class="page-header__nav-trigger" id="page-header__nav-trigger" aria-haspopup="true"
+                aria-owns="page-header__nav-menu" aria-controls="page-header__nav-menu"
+                aria-expanded="false">
+            <span class="page-header__nav-trigger-label">Menu</span>
+            <span class="page-header__nav-trigger-icon"></span>
+        </button>
+
+        <nav class="page-header__nav-menu" id="page-header__nav-menu" aria-expanded="false"
+             aria-labelledby="page-header__nav-trigger">
+            <ul class="page-header__nav-list">
+                <li class="page-header__nav-item" data-th-each="menuItem : ${menuItems}">
+                    <a class="page-header__nav-link"
+                       data-th-classappend="${menuItem.path == currentPath ? 'page-header__nav-link--active' : ''}"
+                       data-th-href="${portal.pageUrl({'_path=' + menuItem.path})}"
+                       data-th-text="${menuItem.menuName} ?: ${menuItem.displayName}">Page title</a>
+                    <ul class="page-header__nav-list page-header__nav-list--level-2"
+                        data-th-if="${menuItem.hasChildren}">
+                        <li class="page-header__nav-item" data-th-each="submenuItem : ${menuItem.children}">
+                            <a class="page-header__nav-link"
+                               data-th-classappend="${submenuItem.path == currentPath ? 'page-header__nav-link--active' : ''}"
+                               data-th-href="${portal.pageUrl({'_path=' + submenuItem.path})}"
+                               data-th-text="${submenuItem.menuName} ?: ${submenuItem.displayName}">Page title</a>
+                        </li>
+                    </ul>
+                </li>
+
+            </ul>
+        </nav>
+</header>
+
+<main data-th-attr="data-portal-region=${mainRegion.name}">
+    <div>
+        <p>This is the Gulp Starter from Enonic</p>
+    </div>
+    <div data-th-each="component : ${mainRegion.components}" data-th-remove="tag">
+        <div data-portal-component="${component.path}" data-th-remove="tag"></div>
+    </div>
+</main>
+
+<footer class="page-footer" role="contentinfo">
+    <a class="page-footer__link" href="https://enonic.com">Enonic</a>
+</footer>
+
+<script data-th-src="${portal.assetUrl({'_path=js/main.min.js'})}"></script>
+
+</body>
+</html>

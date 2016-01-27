@@ -1,0 +1,10 @@
+.page-footer {
+  @extend .container;
+  background: #333;
+  padding-top: 30px;
+  padding-bottom: 30px;
+
+  &__link {
+    color: #fff;
+  }
+}
