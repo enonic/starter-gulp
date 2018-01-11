@@ -1,18 +1,15 @@
 plugins {
     id 'java'
-    id 'com.enonic.xp.app' version '1.0.11'
+    id 'com.enonic.xp.app' version '1.0.15'
     id 'com.moowork.gulp' version '1.2.0'
 }
 
-xp {
-  version = xpVersion
-}
-
 app {
-    name = project.ext.appName
-    displayName = project.ext.displayName
+    name = project.appName
+    displayName = 'Gulp Starter Kit'
     vendorName = 'Enonic AS'
     vendorUrl = 'http://enonic.com'
+    systemVersion = "${xpVersion}"
 }
 
 dependencies {
@@ -31,11 +28,7 @@ repositories {
 }
 
 node {
-    // Version of node to use.
-    //version = '0.12.7'
     version = '4.2.4'
-
-    // Enabled the automatic download. False is the default (for now).
     download = true
 }
 
